@@ -97,8 +97,9 @@ const handleNoteDelete = (e) => {
 
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
-  e.preventDefault();
+  e.preventDefault(); //to prevent browser 
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  console.log(activeNote);
   renderActiveNote();
 };
 

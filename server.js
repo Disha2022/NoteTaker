@@ -6,6 +6,8 @@ const notesJson = require('./db/db.json');
 const PORT = process.env.PORT || 3001;
 const app = express(); //instantiate the server
 //===================================================================
+const { v4: uuidv4 } = require('uuid'); // create unique id for notes
+//====================================================================
 
 //middleware
 app.use(express.static('public'));
@@ -18,6 +20,8 @@ app.use(express.json());
 function createNewNotes(body) {
    console.log(notesJson);
     const note = body;
+  note.id = uuidv4();
+  console.log(note.id);
    notesJson.push(note);
     fs.writeFileSync(
       path.join(__dirname,'./db/db.json'),
