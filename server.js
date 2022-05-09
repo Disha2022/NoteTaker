@@ -62,10 +62,28 @@ app.get('/',(req,res)=>{
 
 //===================================================================
 //Delete Data
+app.delete('*',(req,res)=>{
+  const notesToDeleteFrom = notesJson;
+  res.sendFile(path.join(__dirname,'./public/index.html'));
+  console.log(req.params['0']);//printing out the string for output after clicking delete in console log
+  const deleteString = req.params['0']; //reg.param is request parameter got from console log
+  const outId=deleteString.replace(/\/api\/notes\//,'');//using regex getting id
+  console.log (outId)
 
+  for (let index = 0; index < notesToDeleteFrom.length; index++) {
+    const note = notesToDeleteFrom[index];
+    console.log(notesToDeleteFrom)
+if (note.id===outId) {
+           notesToDeleteFrom.splice(index,1);
+      console.log(notesToDeleteFrom)
+    }
+  }
+
+})
 
 //Listen=============================================================
 
 app.listen(PORT, () => {
+  
     console.log(`API server now on port ${PORT}!`);
   });
